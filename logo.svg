@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" role="img" aria-labelledby="t d">
+<title id="t">Tassa d'Uscita</title><desc id="d">Logo politico istituzionale con scudo, stella e tricolore</desc>
+<path fill="#c6a15b" d="M15 13h139v104c0 28-27 47-69.5 61C42 164 15 145 15 117z"/>
+<path fill="#10151c" d="M25 23h119v92c0 21-21 37-59.5 51C46 152 25 136 25 115z"/>
+<path fill="#c6a15b" d="m84.5 42 8.4 17 18.8 2.7-13.6 13.2 3.2 18.7-16.8-8.8-16.8 8.8 3.2-18.7-13.6-13.2L76.1 59z"/>
+<path fill="#1e7548" d="M41 112h29v25H41z"/><path fill="#f7f4ed" d="M70 112h29v25H70z"/><path fill="#b51f28" d="M99 112h29v25H99z"/>
+<text x="176" y="75" fill="#f7f4ed" font-family="Arial, sans-serif" font-size="58" font-weight="900" letter-spacing="-1">TASSA</text>
+<text x="176" y="137" fill="#c6a15b" font-family="Arial, sans-serif" font-size="58" font-weight="900" letter-spacing="-1">D'USCITA</text>
+<path fill="#b51f28" d="M177 151h542v7H177z"/>
+</svg>

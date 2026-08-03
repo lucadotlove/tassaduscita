@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Simulatore economico aperto della Tassa d'Uscita e di Nova Industria Italia. Esplora scenari, ipotesi e limiti.">
+  <meta name="theme-color" content="#061426">
+  <title>Simulatore economico — Tassa d'Uscita</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="simulatore.css">
+</head>
+<body class="sim-page">
+<header class="site-header" id="top">
+  <div class="flag-line"><i></i><i></i><i></i></div>
+  <div class="container nav-wrap">
+    <a class="brand" href="index.html"><img src="logo.svg" alt="Tassa d'Uscita"></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><b class="sr-only">Menu</b></button>
+    <nav id="main-nav" class="main-nav">
+      <a href="index.html#verita">La verità</a>
+      <a href="index.html#proposta">La proposta</a>
+      <a class="active" href="simulatore.html">Simulatore</a>
+      <a href="#fonti">Fonti</a>
+      <a class="nav-cta" href="index.html#aderisci">Schierati</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="sim-hero">
+    <div class="sim-hero-noise"></div>
+    <div class="sim-hero-map"></div>
+    <div class="container sim-hero-inner">
+      <p class="sim-kicker">DATI PUBBLICI. IPOTESI VISIBILI. RISULTATI MODIFICABILI.</p>
+      <h1>NON CHIEDIAMO DI CREDERCI.<br><em>CHIEDIAMO DI CONTROLLARE I NUMERI.</em></h1>
+      <p class="sim-lead">Esplora come Tassa d'Uscita e Nova Industria Italia potrebbero incidere su deficit, debito, produzione e lavoro. Il modello mostra anche quando il piano non regge.</p>
+      <div class="sim-hero-actions">
+        <a class="button sim-primary" href="#dashboard">Avvia il simulatore</a>
+        <a class="button sim-secondary" href="#metodo">Come funziona</a>
+      </div>
+      <div class="sim-trust"><span>ISTAT</span><span>MEF</span><span>BANCA D'ITALIA</span><span>COMMISSIONE UE</span></div>
+    </div>
+  </section>
+
+  <section class="sim-dashboard" id="dashboard">
+    <div class="container">
+      <div class="sim-toolbar">
+        <div>
+          <p class="section-label">SIMULATORE 2026–2030</p>
+          <h2>Cambia scenario. Guarda cosa succede.</h2>
+        </div>
+        <div class="scenario-switch" role="group" aria-label="Seleziona scenario">
+          <button data-scenario="prudente">Prudente</button>
+          <button class="selected" data-scenario="centrale">Centrale</button>
+          <button data-scenario="ambizioso">Ambizioso</button>
+        </div>
+      </div>
+
+      <div class="model-status">
+        <span class="status-dot"></span>
+        <strong>Scenario <span id="scenario-name">centrale</span></strong>
+        <span>— valori illustrativi, non previsione ufficiale</span>
+      </div>
+
+      <div class="kpi-grid">
+        <article class="kpi-card kpi-dark">
+          <div class="kpi-top"><span>DEFICIT / PIL 2030</span><i>01</i></div>
+          <strong id="kpi-deficit">1,37%</strong>
+          <p><b id="kpi-deficit-delta">−0,43 punti</b> rispetto allo scenario base</p>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>DEBITO / PIL 2030</span><i>02</i></div>
+          <strong id="kpi-debt">132,5%</strong>
+          <p><b id="kpi-debt-delta">−2,3 punti</b> rispetto allo scenario base</p>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>GETTITO CUMULATO</span><i>03</i></div>
+          <strong id="kpi-revenue">38,2</strong><small>miliardi €</small>
+          <p>Gettito netto stimato 2026–2030</p>
+        </article>
+        <article class="kpi-card kpi-gold">
+          <div class="kpi-top"><span>LAVORO PROTETTO / CREATO</span><i>04</i></div>
+          <strong id="kpi-jobs">23.100</strong>
+          <p>Posti diretti e di filiera nel 2030</p>
+        </article>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card chart-wide">
+          <div class="chart-head">
+            <div><span class="eyebrow">CONTI PUBBLICI</span><h3>Deficit: scenario base e piano</h3></div>
+            <div class="legend"><span class="base"></span>Base <span class="plan"></span>Con piano</div>
+          </div>
+          <div class="chart-wrap"><canvas id="deficit-chart"></canvas></div>
+        </article>
+        <article class="chart-card">
+          <div class="chart-head"><div><span class="eyebrow">DA DOVE ARRIVA</span><h3>Miglioramento del saldo 2030</h3></div></div>
+          <div class="chart-wrap donut"><canvas id="impact-chart"></canvas></div>
+          <div class="impact-total"><span>Totale annuo</span><strong id="impact-total">10,8 mld €</strong></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="stress-section" id="stress">
+    <div class="container stress-layout">
+      <div class="stress-copy">
+        <p class="section-label light">SMONTA IL PIANO</p>
+        <h2>Riduci le aspettative.<br>Vedi se regge ancora.</h2>
+        <p>Un modello serio deve mostrare anche il fallimento. Abbassa il gettito o i ritorni industriali: i risultati si aggiornano immediatamente.</p>
+        <div class="uncertainty-box">
+          <span>Fattore più incerto</span>
+          <strong>Base imponibile realmente intercettabile</strong>
+        </div>
+      </div>
+      <div class="stress-panel">
+        <label class="range-control">
+          <span><b>Gettito effettivo</b><output id="tax-output">100%</output></span>
+          <input id="tax-factor" type="range" min="40" max="120" value="100" step="5">
+          <small>Quanto della stima centrale viene realmente riscosso.</small>
+        </label>
+        <label class="range-control">
+          <span><b>Ritorni Nova Industria Italia</b><output id="nii-output">100%</output></span>
+          <input id="nii-factor" type="range" min="40" max="120" value="100" step="5">
+          <small>Quanto si realizza di imposte preservate, crescita e dividendi.</small>
+        </label>
+        <div class="stress-result">
+          <span>DEFICIT / PIL 2030 SOTTO STRESS</span>
+          <strong id="stress-deficit">1,37%</strong>
+          <p id="stress-message">Il piano migliora i conti, ma non raggiunge il pareggio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pillars-section">
+    <div class="container">
+      <div class="section-head centered">
+        <p class="section-label">DUE STRUMENTI, DUE COMPITI DIVERSI</p>
+        <h2>La tassa finanzia. L'industria produce.</h2>
+      </div>
+      <div class="pillar-grid">
+        <article>
+          <span class="pillar-number">01</span>
+          <h3>Tassa d'Uscita</h3>
+          <p>Contributo mirato sulle grandi operazioni patrimoniali che trasferiscono fuori dall'Italia valore maturato nel Paese.</p>
+          <ul><li>Soglia molto alta</li><li>Correzione per elusione e contenzioso</li><li>Una quota riduce il deficit</li><li>Una quota torna al ceto medio</li></ul>
+          <a href="index.html#proposta">Leggi la proposta →</a>
+        </article>
+        <article class="pillar-featured">
+          <span class="pillar-number">02</span>
+          <h3>Nova Industria Italia</h3>
+          <p>Fondo industriale pubblico per intervenire, caso per caso, su capacità produttive strategiche con un piano sostenibile.</p>
+          <ul><li>Due diligence indipendente</li><li>Governance professionale</li><li>Obiettivi e scadenze pubbliche</li><li>Vendita o chiusura se il piano fallisce</li></ul>
+          <a href="#metodo">Vedi il metodo →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="method-section" id="metodo">
+    <div class="container method-grid">
+      <div>
+        <p class="section-label light">COME È COSTRUITO</p>
+        <h2>Dati ufficiali sopra.<br>Ipotesi politiche sotto.</h2>
+      </div>
+      <div class="method-steps">
+        <article><b>1</b><div><h3>Dati di partenza</h3><p>Deficit, debito, PIL e distribuzione della ricchezza provengono da fonti istituzionali.</p></div></article>
+        <article><b>2</b><div><h3>Ipotesi visibili</h3><p>Base imponibile, aliquota, riscossione, costi e ritorni industriali sono dichiarati e modificabili.</p></div></article>
+        <article><b>3</b><div><h3>Niente doppio conteggio</h3><p>La redistribuzione è una spesa; solo le entrate fiscali generate dalla crescita tornano nel saldo.</p></div></article>
+        <article><b>4</b><div><h3>Stress test</h3><p>Il piano viene provato anche con risultati inferiori alle attese.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sources-section" id="fonti">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-label">FONTI E TRASPARENZA</p>
+        <h2>Ogni numero deve poter essere controllato.</h2>
+      </div>
+      <div class="source-grid">
+        <a href="https://www.istat.it/" target="_blank" rel="noopener"><span>ISTAT</span><strong>Deficit, debito e conti nazionali</strong><i>↗</i></a>
+        <a href="https://www.mef.gov.it/" target="_blank" rel="noopener"><span>MEF</span><strong>Documento di finanza pubblica</strong><i>↗</i></a>
+        <a href="https://www.bancaditalia.it/" target="_blank" rel="noopener"><span>BANCA D'ITALIA</span><strong>Ricchezza e distribuzione patrimoniale</strong><i>↗</i></a>
+        <a href="https://economy-finance.ec.europa.eu/" target="_blank" rel="noopener"><span>COMMISSIONE UE</span><strong>Previsioni economiche e confronto</strong><i>↗</i></a>
+      </div>
+      <div class="disclaimer">
+        <b>Avvertenza:</b> il simulatore esplora scenari e non costituisce una previsione economica, una valutazione giuridica o una stima ufficiale di gettito. La base imponibile della proposta non è oggi rilevata da una statistica completa.
+      </div>
+    </div>
+  </section>
+
+  <section class="sim-cta">
+    <div class="container sim-cta-inner">
+      <div><span>MODELLO APERTO</span><h2>Controlla le formule.<br>Cambia le ipotesi.</h2></div>
+      <a class="button sim-primary" href="Simulatore_Tassa_Uscita_Nova_Industria_Italia_WEBSTYLE.xlsx" download>Scarica il modello Excel</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <img src="logo.svg" alt="Tassa d'Uscita">
+    <p>Difendere lavoro, impresa e proprietà diffusa. Rendere trasparenti dati, ipotesi e risultati.</p>
+    <nav><a href="index.html">Home</a><a href="#dashboard">Dashboard</a><a href="#metodo">Metodo</a></nav>
+    <nav><a href="#fonti">Fonti</a><a href="index.html#faq">FAQ</a><a href="index.html#aderisci">Aderisci</a></nav>
+  </div>
+  <div class="container footer-bottom"><span>© <span id="year"></span> tassaduscita.com — Simulatore illustrativo</span><a href="#top">TORNA SU ↑</a></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
+<script src="simulatore.js"></script>
+</body>
+</html>
